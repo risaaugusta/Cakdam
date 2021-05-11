@@ -1,12 +1,11 @@
 import 'package:flutter/material.dart';
 
-class Colors{
-  const Colors();
+class Coloring{
 
-  static const  mainColor = const Color(0xff1D407B);
-  static const  secondColor = const Color(0xff8ebbe5);
-  static const  titleColor = const Color(0xff5a606b);
-  static const  subColor = const Color(0xffcad0db);
+  static const  mainColor = Color(0xff1D407B);
+  static const  secondColor =  Color(0xff8ebbe5);
+  static const  titleColor =  Color(0xff5a606b);
+  static const  subColor =  Color(0xffcad0db);
 }
 
 class Fonts{
