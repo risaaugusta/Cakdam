@@ -49,6 +49,8 @@ flutter:
       - assets/
       - assets/img/logo.png
       - assets/img/bg.png
+      - assets/img/kadalpang.jpg
+
   #   - images/a_dot_burr.jpeg
   #   - images/a_dot_ham.jpeg
 
