@@ -42,6 +42,7 @@ class Intro extends StatelessWidget {
                         fontStyle: FontStyle.italic
                     ) ),
               ),
+
             ],
           ),
           )
