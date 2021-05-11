@@ -1,5 +1,8 @@
+import 'package:cakdam/ui/intro.dart';
+import 'package:cakdam/ui/limitedlist.dart';
 import 'package:flutter/material.dart';
 import 'package:cakdam/style/style.dart';
+import 'package:cakdam/ui/intro.dart';
 
 class Home extends StatefulWidget {
   Home({Key key}) : super(key: key);
@@ -50,6 +53,14 @@ class _HomeState extends State<Home> {
                ),
              ],
            ),
+         ),
+         ListView(
+           scrollDirection: Axis.vertical,
+           children: <Widget>[
+             SizedBox(height:75),
+             Intro(),
+             Limitedlist(),
+           ],
          ),
        ],
       ),
