@@ -18,8 +18,8 @@ class _HomeState extends State<Home> {
       body: Stack(
        children: [
          Container(
-           height: 700,
-//         height: MediaQuery.of(context).size.height,
+//           height: 700,
+         height: MediaQuery.of(context).size.height,
            width: MediaQuery.of(context).size.width,
            decoration: BoxDecoration(
              image: const DecorationImage(

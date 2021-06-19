@@ -1,0 +1,48 @@
+{
+  "project_info": {
+    "project_number": "6861720913",
+    "firebase_url": "https://cakdam-2021go-default-rtdb.asia-southeast1.firebasedatabase.app",
+    "project_id": "cakdam-2021go",
+    "storage_bucket": "cakdam-2021go.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:6861720913:android:096bdb6a5ad0c5972d1770",
+        "android_client_info": {
+          "package_name": "com.arda.cakdam"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "6861720913-sprqdqf5e4vol18b636cfaahujpb9hkh.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.arda.cakdam",
+            "certificate_hash": "02b954bed27ea32b75defc99d1bdfa4c597ad36d"
+          }
+        },
+        {
+          "client_id": "6861720913-jj2m0nrhjmfo8nej96c6gju644jidapt.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAWPiCiVZuqXKkEZdO0x3UC1xlV_FQdTpw"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "6861720913-jj2m0nrhjmfo8nej96c6gju644jidapt.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

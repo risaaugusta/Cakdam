@@ -1,4 +1,5 @@
 import 'package:cakdam/ui/home.dart';
+import 'package:cakdam/ui/limitedlist.dart';
 import 'package:cakdam/ui/splashscreen.dart';
 import 'package:flutter/material.dart';
 
@@ -12,6 +13,7 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return  MaterialApp(
       home: Splashscreen(),
+//    home: Limitedlist(),
     );
   }
 }
