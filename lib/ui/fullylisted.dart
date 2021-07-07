@@ -1,3 +1,4 @@
+import 'package:cakdam/ui/auth.dart';
 import 'package:firebase_database/firebase_database.dart';
 import 'package:flutter/material.dart';
 import 'package:cakdam/style/style.dart';
@@ -292,8 +293,8 @@ class _LimitedlistState extends State<Limitedlist> {
                                           Padding(
                                             padding: const EdgeInsets.only(left:200,top:5),
                                             child: Text(
-//                                                "${dataList[index]["Ultrasonic"]["Data"]}",
-                                              dataList[index]["Ultrasonic"]["Data"] < 300 ? "Normal" : "Siaga",
+                                                "${dataList[index]["Ultrasonic"]["Data"]}",
+//                                              dataList[index]["Ultrasonic"]["Data"] < 300 ? "Normal" : "Siaga",
 //                                              dataList[index]["Data"] < 200 ? "Normal" : "Siaga",
 //                                            print('Data : ${snapshot.value}');
                                                 textAlign: TextAlign.left,
@@ -310,7 +311,7 @@ class _LimitedlistState extends State<Limitedlist> {
                                               onPressed: () {
                                                 Navigator.push(
                                                     context,
-                                                  MaterialPageRoute(builder: (context) => Detail(nama:namaDam[index],alamat:alamat[index],img:img[index])),); //lebokno variabel
+                                                  MaterialPageRoute(builder: (context) => Detail(nama:namaDam[index],alamat:alamat[index],img:img[index], dataList:dataList[index])),); //lebokno variabel
 //                                                  MaterialPageRoute(builder: (context) => Detail(nama:"test")));
                                               },
                                             ),
@@ -346,166 +347,370 @@ class _LimitedlistState extends State<Limitedlist> {
 
 
 //DETAIL
-class Detail extends StatelessWidget {
-  DatabaseReference _db = FirebaseDatabase.instance.reference().child("CakDam");
-  var dataList = List();
-  var damList = List();
+//class Detail extends StatelessWidget {
+//  DatabaseReference _db = FirebaseDatabase.instance.reference().child("CakDam");
+//  var dataList = List();
+//  var damList = List();
+//  String nama = '';
+//  String alamat = '';
+//  String img = '';
+//
+//  Detail({this.nama,this.alamat,this.img});
+//
+//  @override
+//  Widget build(BuildContext context) {
+//    return Scaffold(
+//      appBar: AppBar(
+//        centerTitle: true,
+//        title: new Text(
+//          ("Detail Dam"),
+//          style: TextStyle(
+//              color: Coloring.mainColor,
+//              fontSize: 12,
+//              fontFamily: Fonts.BOLD
+//          ),
+//          textAlign: TextAlign.center,
+//        ),
+//        backgroundColor: Coloring.secondColor,
+//      ),
+//      body: Column(
+//        crossAxisAlignment: CrossAxisAlignment.start,
+//        children: [
+//          Stack(
+//            children: [
+//              ClipPath(
+//                clipper: MyClipper(),
+//                child: Container(
+//                  height: 250,
+//                  decoration: BoxDecoration(
+//                    image: const DecorationImage(
+//                      image: AssetImage('assets/img/kadalpang.jpg'),
+//                      fit: BoxFit.cover,
+//                    ),
+//                  ),
+//
+//                ),
+//              ),
+//
+//            ],
+//          ),
+//          Flexible(
+//            child: Container(
+//              height: 750,
+//              width: 385,
+////            margin: EdgeInsets.only(left: 20),
+//              child: ListView(
+//                scrollDirection: Axis.vertical,
+//                children: [
+//                  Padding(
+//                      padding: EdgeInsets.only(left: 20, top: 10),
+//                      child: Text(nama, style: //itu yg ini
+//                      TextStyle(color: Colors.black,
+//                          fontSize: 20,
+//                          fontFamily: Fonts.BOLD))),
+//
+//                  Container(
+//                      width: 50,
+//                      margin: EdgeInsets.only(left: 20, top: 10),
+//                      child: Text(
+//                        "Status      : ",
+//
+//                        style:
+//                        TextStyle(color: Colors.black,
+//                            fontSize: 15,
+//                            fontFamily: Fonts.REGULAR),
+//                        textAlign: TextAlign.justify,)),
+//
+//                  Container(
+//                      width: 350,
+//                      margin: EdgeInsets.only(left: 20 ),
+//                      child: Text("Arus air    : ",
+//                          textAlign: TextAlign.justify,
+//                          style:
+//                          TextStyle(color: Colors.black,
+//                            fontSize: 15,
+//                            fontFamily: Fonts.REGULAR,))
+//
+//                  ),
+//                  Container(
+//                      width: 350,
+//                      margin: EdgeInsets.only(left: 20 ),
+//                      child: Text("Debit air   : ",
+//                          textAlign: TextAlign.justify,
+//                          style:
+//                          TextStyle(color: Colors.black,
+//                            fontSize: 15,
+//                            fontFamily: Fonts.REGULAR,))
+//
+//                  ),
+//
+//
+//                ],
+//              ),
+//            ),
+//          ),
+//
+//          Row(
+//            children: [
+//              Padding(
+//                padding: EdgeInsets.only( left:70,bottom: 50),
+//                child: ButtonTheme(
+//                  minWidth: 120,
+//                  height: 50,
+//                  child: RaisedButton(
+//                    shape: RoundedRectangleBorder(
+//                        borderRadius: BorderRadius.circular(10.0),
+//                        side: BorderSide(color: Coloring.iconicColor)),
+//                    onPressed: () {
+//                      Navigator.push(
+//                        context,
+//                        MaterialPageRoute(builder: (context) => Auth()),);
+//                    },
+//                    color: Colors.white,
+//                    textColor: Coloring.iconicColor,
+//                    child: Text("Tutup Kanal", style:
+//                    TextStyle(color: Coloring.iconicColor,
+//                        fontSize: 15,
+//                        fontFamily: Fonts.REGULAR)),
+//                  ),
+//                ),
+//              ),
+//              SizedBox(width: 30),
+//              Padding(
+//                padding: EdgeInsets.only( bottom: 50),
+//                child: ButtonTheme(
+//                  minWidth: 120,
+//                  height: 50,
+//                  child: RaisedButton(
+//                    shape: RoundedRectangleBorder(
+//                        borderRadius: BorderRadius.circular(10.0),
+//                        side: BorderSide(color: Coloring.iconicColor)),
+//                    onPressed: () {
+//                      Navigator.push(
+//                        context,
+//                        MaterialPageRoute(builder: (context) => Auth()),);
+//                    },
+//                    color: Coloring.iconicColor,
+//                    textColor: Colors.white,
+//                    child: Text("Buka Kanal", style:
+//                    TextStyle(color: Colors.white,
+//                        fontSize: 15,
+//                        fontFamily: Fonts.REGULAR)),
+//                  ),
+//                ),
+//              ),
+//            ],
+//          ),
+//        ],
+//      ),
+//
+//    );
+//  }
+//}
+
+
+//DETAIL YANG NYOBA
+class Detail extends StatefulWidget {
+  Detail({Key key, this.nama,this.alamat,this.img, this.dataList}) : super(key: key);
   String nama = '';
   String alamat = '';
   String img = '';
+  var dataList = {};
 
-  Detail({this.nama,this.alamat,this.img});
+  @override
+  _DetailState createState() => _DetailState();
+}
+
+class _DetailState extends State<Detail> {
+
+  DatabaseReference _db = FirebaseDatabase.instance.reference().child("CakDam");
+  var dataList = List();
+  var damList = List();
+
+  final List<String> namaDam = <String>['Dam Kadalpang', 'Dam Kalisari', 'Dam Rolak','Dam Sengkaling'];
+  final List<String> alamat = <String>[
+    'Kec. Klojen, Kota Malang',
+    'Mangliawan, Pakis, Malang',
+    'Kedungkandang, Kota Malang',
+    'Terusan Sengkaling, Kota Malang',
+  ];
+  final List<String> img = <String>[
+    'assets/img/kadalpang.jpg',
+    'assets/img/rolak.jpg',
+    'assets/img/rolak.jpg',
+    'assets/img/rolak.jpg'];
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        centerTitle: true,
-        title: new Text(
-          ("Detail Dam"),
-          style: TextStyle(
-              color: Coloring.mainColor,
-              fontSize: 12,
-              fontFamily: Fonts.BOLD
-          ),
-          textAlign: TextAlign.center,
-        ),
-        backgroundColor: Coloring.secondColor,
-      ),
-      body: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          Stack(
-            children: [
-              ClipPath(
-                clipper: MyClipper(),
-                child: Container(
-                  height: 250,
-                  decoration: BoxDecoration(
-                    image: const DecorationImage(
-                      image: AssetImage('assets/img/kadalpang.jpg'),
-                      fit: BoxFit.cover,
-                    ),
-                  ),
 
-                ),
-              ),
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.end,
+      children: [
 
-            ],
-          ),
-          Flexible(
-            child: Container(
-              height: 750,
-              width: 385,
-//            margin: EdgeInsets.only(left: 20),
-              child: ListView(
-                scrollDirection: Axis.vertical,
-                children: [
-                  Padding(
-                      padding: EdgeInsets.only(left: 20, top: 10),
-                      child: Text(nama, style: //itu yg ini
-                      TextStyle(color: Colors.black,
-                          fontSize: 20,
-                          fontFamily: Fonts.BOLD))),
+        Stack(
+          children: [
+            SizedBox(
+//                      height: MediaQuery.of(context).size.height,
+                      height: 500,
+                      child:
+                            Scaffold(
+                              appBar: AppBar(
+                                centerTitle: true,
+                                title: new Text(
+                                  ("Detail Dam"),
+                                  style: TextStyle(
+                                      color: Coloring.mainColor,
+                                      fontSize: 12,
+                                      fontFamily: Fonts.BOLD
+                                  ),
+                                  textAlign: TextAlign.center,
+                                ),
+                                backgroundColor: Coloring.secondColor,
+                              ),
+                              body: Column(
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children: [
+                                  Stack(
+                                    children: [
+                                      ClipPath(
+                                        clipper: MyClipper(),
+                                        child: Container(
+                                          height: 250,
+                                          decoration: BoxDecoration(
+                                            image: const DecorationImage(
+                                              image: AssetImage('assets/img/kadalpang.jpg'),
+                                              fit: BoxFit.cover,
+                                            ),
+                                          ),
 
-                  Container(
-                      width: 50,
-                      margin: EdgeInsets.only(left: 20, top: 10),
-                      child: Text(
-                        "Status      : ",
+                                        ),
+                                      ),
 
-                        style:
-                        TextStyle(color: Colors.black,
-                            fontSize: 15,
-                            fontFamily: Fonts.REGULAR),
-                        textAlign: TextAlign.justify,)),
+                                    ],
+                                  ),
+                                  Flexible(
+                                    child: Container(
+                                      height: 750,
+                                      width: 385,
+                        //            margin: EdgeInsets.only(left: 20),
+                                      child: ListView(
+                                        scrollDirection: Axis.vertical,
+                                        children: [
+                                          Padding(
+                                              padding: EdgeInsets.only(left: 20, top: 10),
+                                              child: Text(widget.nama, style: //itu yg ini
+                                              TextStyle(color: Colors.black,
+                                                  fontSize: 20,
+                                                  fontFamily: Fonts.BOLD))),
 
-                  Container(
-                      width: 350,
-                      margin: EdgeInsets.only(left: 20 ),
-                      child: Text("Arus air    : ",
-                          textAlign: TextAlign.justify,
-                          style:
-                          TextStyle(color: Colors.black,
-                            fontSize: 15,
-                            fontFamily: Fonts.REGULAR,))
+                                          Container(
+                                              width: 50,
+                                              margin: EdgeInsets.only(left: 20, top: 10),
+                                              child: Text(
+//                                                "Status      : " + widget.dataList["Ultrasonic"]["Data"].toString(),
 
-                  ),
-                  Container(
-                      width: 350,
-                      margin: EdgeInsets.only(left: 20 ),
-                      child: Text("Debit air   : ",
-                          textAlign: TextAlign.justify,
-                          style:
-                          TextStyle(color: Colors.black,
-                            fontSize: 15,
-                            fontFamily: Fonts.REGULAR,))
+                                                "Status : ${dataList.map((e) => e.toString()).toList()}",
+                                                style:
+                                                TextStyle(color: Colors.black,
+                                                    fontSize: 15,
+                                                    fontFamily: Fonts.REGULAR),
+                                                textAlign: TextAlign.justify,)),
 
-                  ),
+                                          Container(
+                                              width: 350,
+                                              margin: EdgeInsets.only(left: 20 ),
+                                              child: Text("Arus air    : ",
+                                                  textAlign: TextAlign.justify,
+                                                  style:
+                                                  TextStyle(color: Colors.black,
+                                                    fontSize: 15,
+                                                    fontFamily: Fonts.REGULAR,))
+
+                                          ),
+                                          Container(
+                                              width: 350,
+                                              margin: EdgeInsets.only(left: 20 ),
+                                              child: Text("Debit air   : ",
+                                                  textAlign: TextAlign.justify,
+                                                  style:
+                                                  TextStyle(color: Colors.black,
+                                                    fontSize: 15,
+                                                    fontFamily: Fonts.REGULAR,))
+
+                                          ),
 
 
-                ],
-              ),
+                                        ],
+                                      ),
+                                    ),
+                                  ),
+
+                                  Row(
+                                    children: [
+                                      Padding(
+                                        padding: EdgeInsets.only( left:70,bottom: 50),
+                                        child: ButtonTheme(
+                                          minWidth: 120,
+                                          height: 50,
+                                          child: RaisedButton(
+                                            shape: RoundedRectangleBorder(
+                                                borderRadius: BorderRadius.circular(10.0),
+                                                side: BorderSide(color: Coloring.iconicColor)),
+                                            onPressed: () {
+//                                              Navigator.push(
+//                                                context,
+//                                                MaterialPageRoute(builder: (context) => Auth()),);
+                                              print(dataList);
+                                            },
+                                            color: Colors.white,
+                                            textColor: Coloring.iconicColor,
+                                            child: Text("Tutup Kanal", style:
+                                            TextStyle(color: Coloring.iconicColor,
+                                                fontSize: 15,
+                                                fontFamily: Fonts.REGULAR)),
+                                          ),
+                                        ),
+                                      ),
+                                      SizedBox(width: 30),
+                                      Padding(
+                                        padding: EdgeInsets.only( bottom: 50),
+                                        child: ButtonTheme(
+                                          minWidth: 120,
+                                          height: 50,
+                                          child: RaisedButton(
+                                            shape: RoundedRectangleBorder(
+                                                borderRadius: BorderRadius.circular(10.0),
+                                                side: BorderSide(color: Coloring.iconicColor)),
+                                            onPressed: () {
+                                              Navigator.push(
+                                                context,
+                                                MaterialPageRoute(builder: (context) => Auth()),);
+                                            },
+                                            color: Coloring.iconicColor,
+                                            textColor: Colors.white,
+                                            child: Text("Buka Kanal", style:
+                                            TextStyle(color: Colors.white,
+                                                fontSize: 15,
+                                                fontFamily: Fonts.REGULAR)),
+                                          ),
+                                        ),
+                                      ),
+                                    ],
+                                  ),
+                                ],
+                              ),
+
+                            ),
             ),
-          ),
 
-          Row(
-            children: [
-              Padding(
-                padding: EdgeInsets.only( left:70,bottom: 50),
-                child: ButtonTheme(
-                  minWidth: 120,
-                  height: 50,
-                  child: RaisedButton(
-                    shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(10.0),
-                        side: BorderSide(color: Coloring.iconicColor)),
-                    onPressed: () {
-                      Navigator.push(
-                        context,
-                        MaterialPageRoute(builder: (context) => Fullylisted()),);
-                    },
-                    color: Colors.white,
-                    textColor: Coloring.iconicColor,
-                    child: Text("Tutup Kanal", style:
-                    TextStyle(color: Coloring.iconicColor,
-                        fontSize: 15,
-                        fontFamily: Fonts.REGULAR)),
-                  ),
-                ),
-              ),
-              SizedBox(width: 30),
-              Padding(
-                padding: EdgeInsets.only( bottom: 50),
-                child: ButtonTheme(
-                  minWidth: 120,
-                  height: 50,
-                  child: RaisedButton(
-                    shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(10.0),
-                        side: BorderSide(color: Coloring.iconicColor)),
-                    onPressed: () {
-                      Navigator.push(
-                        context,
-                        MaterialPageRoute(builder: (context) => Fullylisted()),);
-                    },
-                    color: Coloring.iconicColor,
-                    textColor: Colors.white,
-                    child: Text("Buka Kanal", style:
-                    TextStyle(color: Colors.white,
-                        fontSize: 15,
-                        fontFamily: Fonts.REGULAR)),
-                  ),
-                ),
-              ),
-            ],
-          ),
-        ],
-      ),
-
+//
+          ],
+        ),
+      ],
     );
   }
 }
+
 
 
 

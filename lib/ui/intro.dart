@@ -33,7 +33,7 @@ class Intro extends StatelessWidget {
                 ),
               Padding(
                 padding: const EdgeInsets.all(10),
-                child: Text("Solusi cerdas memantau dam",
+                child: Text("Solusi Cerdas Memantau Dam",
                     textAlign: TextAlign.center,
                     style: TextStyle(
                         color: Colors.black,
